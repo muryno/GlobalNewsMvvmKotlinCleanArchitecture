@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ubn.globalnewsmvvmarchitecture.data.model.Article
 import com.ubn.globalnewsmvvmarchitecture.databinding.NewsListItemBinding
+import javax.inject.Inject
 
 class NewsAdapter:RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
