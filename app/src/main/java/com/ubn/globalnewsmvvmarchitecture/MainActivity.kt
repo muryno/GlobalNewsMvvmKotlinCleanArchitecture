@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ubn.globalnewsmvvmarchitecture.databinding.ActivityMainBinding
@@ -11,7 +12,6 @@ import com.ubn.globalnewsmvvmarchitecture.presentation.adapter.NewsAdapter
 import com.ubn.globalnewsmvvmarchitecture.presentation.viewmodel.NewsViewModel
 import com.ubn.globalnewsmvvmarchitecture.presentation.viewmodel.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,8 +32,11 @@ class MainActivity : AppCompatActivity() {
                 .get(NewsViewModel::class.java)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
+
         binding.bnvNews.setupWithNavController(
-                fragment.findNavController()
+        navHostFragment.navController
         )
 
     }
