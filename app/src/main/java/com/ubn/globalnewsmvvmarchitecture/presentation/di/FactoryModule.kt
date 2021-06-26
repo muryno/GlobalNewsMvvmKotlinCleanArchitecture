@@ -2,6 +2,7 @@ package com.ubn.globalnewsmvvmarchitecture.presentation.di
 
 import android.app.Application
 import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetNewsHeadlinesUseCase
+import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetSearchedNewsUseCase
 import com.ubn.globalnewsmvvmarchitecture.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -16,11 +17,13 @@ class FactoryModule {
     @Provides
   fun provideNewsViewModelFactory(
      application: Application,
-     getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+     getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+     getSearchedNewsUseCase : GetSearchedNewsUseCase
   ): NewsViewModelFactory {
       return NewsViewModelFactory(
           application,
-          getNewsHeadlinesUseCase
+          getNewsHeadlinesUseCase,
+          getSearchedNewsUseCase
       )
   }
 }

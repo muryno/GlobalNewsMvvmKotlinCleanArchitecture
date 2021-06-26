@@ -2,6 +2,7 @@ package com.ubn.globalnewsmvvmarchitecture.presentation.di
 
 import com.ubn.globalnewsmvvmarchitecture.domain.repository.NewsRepository
 import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetNewsHeadlinesUseCase
+import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetSearchedNewsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,16 @@ class UseCaseModule {
    ): GetNewsHeadlinesUseCase {
       return GetNewsHeadlinesUseCase(newsRepository)
    }
+
+
+   @Singleton
+   @Provides
+   fun provideGetSearchedNewsheadLinesUseCase(
+      newsRepository: NewsRepository
+   ): GetSearchedNewsUseCase {
+      return GetSearchedNewsUseCase(newsRepository)
+   }
+
 }
 
 
