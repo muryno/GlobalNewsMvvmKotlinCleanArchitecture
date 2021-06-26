@@ -1,6 +1,7 @@
 package com.ubn.globalnewsmvvmarchitecture.presentation.di
 
 import com.ubn.globalnewsmvvmarchitecture.data.repository.NewsRepositoryImpl
+import com.ubn.globalnewsmvvmarchitecture.data.repository.dataSource.NewsLocalDataSource
 import com.ubn.globalnewsmvvmarchitecture.data.repository.dataSource.NewsRemoteDataSource
 import com.ubn.globalnewsmvvmarchitecture.domain.repository.NewsRepository
 import dagger.Module
@@ -16,9 +17,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideNewsRepository(
-        newsRemoteDataSource: NewsRemoteDataSource
+        newsRemoteDataSource: NewsRemoteDataSource,
+        newsLocalDataSource: NewsLocalDataSource
     ): NewsRepository {
-        return NewsRepositoryImpl(newsRemoteDataSource)
+        return NewsRepositoryImpl(newsRemoteDataSource,newsLocalDataSource)
     }
 
 }

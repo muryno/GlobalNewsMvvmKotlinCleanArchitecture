@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
 import com.ubn.globalnewsmvvmarchitecture.databinding.FragmentInfoBinding
+import com.ubn.globalnewsmvvmarchitecture.presentation.viewmodel.NewsViewModel
 
 
 class InfoFragment : Fragment() {
     private lateinit var fragmentInfoBinding: FragmentInfoBinding
+
+    private lateinit var viewModel : NewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +26,12 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel=(activity as MainActivity).viewModel
+
+
         fragmentInfoBinding = FragmentInfoBinding.bind(view)
+
 
         fragmentInfoBinding = FragmentInfoBinding.bind(view)
         val args : InfoFragmentArgs by navArgs()
@@ -31,9 +39,14 @@ class InfoFragment : Fragment() {
         fragmentInfoBinding.wvInfo.apply {
             webViewClient = WebViewClient()
             if(article.url!="") {
-                loadUrl(article.url)
+                loadUrl(article.url.toString())
             }
         }
+
+        fragmentInfoBinding.fabSave.setOnClickListener {
+            viewModel.saveArticle(article)
+        }
+
     }
 }
 

@@ -2,6 +2,7 @@ package com.ubn.globalnewsmvvmarchitecture.data.repository
 
 import com.ubn.globalnewsmvvmarchitecture.data.model.APIResponse
 import com.ubn.globalnewsmvvmarchitecture.data.model.Article
+import com.ubn.globalnewsmvvmarchitecture.data.repository.dataSource.NewsLocalDataSource
 import com.ubn.globalnewsmvvmarchitecture.data.repository.dataSource.NewsRemoteDataSource
 import com.ubn.globalnewsmvvmarchitecture.data.util.Resource
 import com.ubn.globalnewsmvvmarchitecture.domain.repository.NewsRepository
@@ -9,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class NewsRepositoryImpl(
-        private val newsRemoteDataSource: NewsRemoteDataSource
+        private val newsRemoteDataSource: NewsRemoteDataSource,
+        private val newsLocalDataSource: NewsLocalDataSource
 ): NewsRepository {
     override suspend fun getNewsHeadlines(country : String, page : Int): Resource<APIResponse> {
         return responseToResource(newsRemoteDataSource.getTopHeadlines(country,page))
@@ -35,7 +37,7 @@ class NewsRepositoryImpl(
 
 
     override suspend fun saveNews(article: Article) {
-        TODO("Not yet implemented")
+     return   newsLocalDataSource.saveArticleToDB(article)
     }
 
     override suspend fun deleteNews(article: Article) {
@@ -43,6 +45,6 @@ class NewsRepositoryImpl(
     }
 
     override fun getSavedNews(): Flow<List<Article>> {
-        TODO("Not yet implemented")
+       return newsLocalDataSource.getSavedArticles()
     }
 }

@@ -2,7 +2,9 @@ package com.ubn.globalnewsmvvmarchitecture.presentation.di
 
 import com.ubn.globalnewsmvvmarchitecture.domain.repository.NewsRepository
 import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetNewsHeadlinesUseCase
+import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetSavedNewsUseCase
 import com.ubn.globalnewsmvvmarchitecture.domain.usecase.GetSearchedNewsUseCase
+import com.ubn.globalnewsmvvmarchitecture.domain.usecase.SaveNewsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +30,25 @@ class UseCaseModule {
    ): GetSearchedNewsUseCase {
       return GetSearchedNewsUseCase(newsRepository)
    }
+
+   @Singleton
+   @Provides
+   fun provideSavesUseCase(
+      newsRepository: NewsRepository
+   ): SaveNewsUseCase {
+      return SaveNewsUseCase(newsRepository)
+   }
+
+
+
+   @Singleton
+   @Provides
+   fun provideGetUseCase(
+      newsRepository: NewsRepository
+   ): GetSavedNewsUseCase {
+      return GetSavedNewsUseCase(newsRepository)
+   }
+
 
 }
 
